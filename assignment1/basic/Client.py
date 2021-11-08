@@ -41,10 +41,10 @@ class Client:
 	def createWidgets(self):
 		"""Build GUI."""
 		# Create Setup button
-		# self.setup = Button(self.master, width=20, padx=3, pady=3)
-		# self.setup["text"] = "Setup"
-		# self.setup["command"] = self.setupMovie
-		# self.setup.grid(row=1, column=0, padx=2, pady=2)
+		self.setup = Button(self.master, width=20, padx=3, pady=3)
+		self.setup["text"] = "Setup"
+		self.setup["command"] = self.setupMovie
+		self.setup.grid(row=1, column=0, padx=2, pady=2)
 		
 		# Create Play button		
 		self.start = Button(self.master, width=20, padx=3, pady=3)
@@ -80,20 +80,16 @@ class Client:
 		self.sendRtspRequest(self.TEARDOWN)		
 		self.master.destroy() # Close the gui window
 		os.remove(CACHE_FILE_NAME + str(self.sessionId) + CACHE_FILE_EXT) # Delete the cache image from video
-		
 
 	def pauseMovie(self):
 		"""Pause button handler."""
 		#TODO
 		if self.state == self.PLAYING:
 			self.sendRtspRequest(self.PAUSE)
-
+	
 	def playMovie(self):
 		"""Play button handler."""
 		#TODO
-		if self.state == self.INIT:
-			self.sendRtspRequest(self.SETUP)
-			return
 		if self.state == self.READY:
 			# Create a new thread to listen for RTP packets
 			threading.Thread(target=self.listenRtp).start()
@@ -264,8 +260,7 @@ class Client:
 						self.state = self.READY
 						
 						# Open RTP port.
-						self.openRtpPort()
-						self.playMovie()
+						self.openRtpPort() 
 					elif self.requestSent == self.PLAY:
 						# self.state = ...
 						self.state = self.PLAYING
