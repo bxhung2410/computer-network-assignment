@@ -79,8 +79,7 @@ class ServerWorker:
 				# Create a new socket for RTP/UDP
 				self.clientInfo["rtpSocket"] = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 				
-				#Reply with OK_200
-				self.replyRtsp(self.OK_200, seq[1]) 
+				self.replyRtsp(self.OK_200, seq[1])
 				
 				# Create a new thread and start sending RTP packets
 				self.clientInfo['event'] = threading.Event()
@@ -123,8 +122,7 @@ class ServerWorker:
 				try:
 					address = self.clientInfo['rtspSocket'][1][0]
 					port = int(self.clientInfo['rtpPort'])
-					#Encode to RTP to transfer
-					self.clientInfo['rtpSocket'].sendto(self.makeRtp(data, frameNumber),(address,port)) 
+					self.clientInfo['rtpSocket'].sendto(self.makeRtp(data, frameNumber),(address,port))
 				except:
 					print("Connection Error")
 					#print('-'*60)

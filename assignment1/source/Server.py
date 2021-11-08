@@ -23,6 +23,3 @@ if __name__ == "__main__":
 	(Server()).main()
 
 
-#Mở cổng port server bằng cú pháp: Server.py <server_port> 
-#Nhận thông tin của client bằng rtsp socket
-#Cho chạy ServerWorker(clientInfo).run()
